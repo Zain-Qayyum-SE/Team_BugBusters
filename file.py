@@ -1,12 +1,11 @@
 #include <iostream>
 #include <string>
-#include <iomanip> // Essential for setw() and alignment
+#include <iomanip> 
 
 using namespace std;
 
 // ---------------- ROOM DATA (Using Parallel Arrays) ----------------
 
-// Room IDs (1, 2, 3) are derived from the array index + 1
 const int NUM_ROOMS = 3;
 
 string roomNames[NUM_ROOMS] = {
@@ -29,45 +28,51 @@ string amenitiesList[NUM_ROOMS] = {
 
 // ---------------- HELPER FUNCTION TO PRINT DOUBLE LINE SEPARATOR ----------------
 void printDoubleSeparator() {
-    // Prints a line long enough to span the columns (95 characters wide)
+    // Length: 95 characters
     cout << "==================================================================================================" << endl;
 }
 
 // ---------------- HELPER FUNCTION TO PRINT SINGLE LINE SEPARATOR ----------------
 void printSingleSeparator() {
-    // Prints a line long enough to span the columns (95 characters wide)
+    // Length: 95 characters
     cout << "--------------------------------------------------------------------------------------------------" << endl;
 }
 
-// ---------------- SHOW ROOMS FUNCTION (Table Display without Structs) ----------------
+// ---------------- SHOW ROOMS FUNCTION (Aesthetically Enhanced) ----------------
 void showRooms() {
 
     cout << "\n";
     printDoubleSeparator();
 
     // Title Row
-    cout << "|| " << left << setw(92) << "         *** AVAILABLE ROOMS FOR SELECTION ***" << "||" << endl;
+    cout << "|| " << left << setw(92) << "         *** AVAILABLE ROOMS & FEATURES ***" << "||" << endl;
 
     printDoubleSeparator();
 
-    // Header Row: ID | ROOM TYPE | PRICE (PKR) | AMENITIES
+    // Header Row: Perfectly aligned and centered text is difficult in console, but we align headers to the left for clarity.
     cout << "|| " << left << setw(5) << "ID"
          << "| " << left << setw(14) << "ROOM TYPE"
          << "| " << left << setw(14) << "PRICE (PKR)"
          << "| " << left << setw(57) << "AMENITIES" << "||" << endl;
 
-    printSingleSeparator();
+    printDoubleSeparator(); // Use double line under the header for strong separation
 
     // Data Rows: Loop through the arrays
     for(int i = 0; i < NUM_ROOMS; i++) {
-        cout << "|| " << left << setw(5) << (i + 1) // ID is array index + 1
+        // Data row
+        cout << "|| " << left << setw(5) << (i + 1)
              << "| " << left << setw(14) << roomNames[i]
              // Right-align price for numeric clarity
              << "| " << right << setw(10) << pricesPerNight[i] << " " << left << setw(3) << ""
              << "| " << left << setw(57) << amenitiesList[i] << "||" << endl;
+             
+        // Use a single line separator between data entries for better reading flow
+        if (i < NUM_ROOMS - 1) {
+            printSingleSeparator();
+        }
     }
 
-    printDoubleSeparator();
+    printDoubleSeparator(); // Close the table with a double line
 }
 
 // ---------------- EXAMPLE MAIN FUNCTION ----------------
