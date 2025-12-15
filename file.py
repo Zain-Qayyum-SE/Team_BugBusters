@@ -4,24 +4,27 @@
 
 using namespace std;
 
-// ---------------- ROOM STRUCTURE (Needed for function signature) ----------------
-struct Room {
-    int id;
-    string name;
-    int pricePerNight;
-    string amenities;
+// ---------------- ROOM DATA (Using Parallel Arrays) ----------------
+
+// Room IDs (1, 2, 3) are derived from the array index + 1
+const int NUM_ROOMS = 3;
+
+string roomNames[NUM_ROOMS] = {
+    "Standard",
+    "Executive",
+    "Suite"
 };
 
-// ---------------- ROOM DATA (Needed for function content) ----------------
-Room rooms[3] = {
-    {1, "Standard", 10000,
-     "1 Bed, Study Table, Fridge, Attached Bathroom"},
+int pricesPerNight[NUM_ROOMS] = {
+    10000,
+    17000,
+    40000
+};
 
-    {2, "Executive", 17000,
-     "2 Beds, Sofa-cum-Bed, Mini Bar, Complimentary Breakfast, Attached Bathroom"},
-
-    {3, "Suite", 40000,
-     "Fresh Fruit Basket, Hot Tub, 2 Rooms, TV, Library, Table Tennis"}
+string amenitiesList[NUM_ROOMS] = {
+    "1 Bed, Study Table, Fridge, Attached Bathroom",
+    "2 Beds, Sofa-cum-Bed, Mini Bar, Complimentary Breakfast, Attached Bathroom",
+    "Fresh Fruit Basket, Hot Tub, 2 Rooms, TV, Library, Table Tennis"
 };
 
 // ---------------- HELPER FUNCTION TO PRINT DOUBLE LINE SEPARATOR ----------------
@@ -36,7 +39,7 @@ void printSingleSeparator() {
     cout << "--------------------------------------------------------------------------------------------------" << endl;
 }
 
-// ---------------- SHOW ROOMS FUNCTION (Table Display with ==) ----------------
+// ---------------- SHOW ROOMS FUNCTION (Table Display without Structs) ----------------
 void showRooms() {
 
     cout << "\n";
@@ -55,15 +58,20 @@ void showRooms() {
 
     printSingleSeparator();
 
-    // Data Rows
-    for(int i = 0; i < 3; i++) {
-        cout << "|| " << left << setw(5) << rooms[i].id
-             << "| " << left << setw(14) << rooms[i].name
+    // Data Rows: Loop through the arrays
+    for(int i = 0; i < NUM_ROOMS; i++) {
+        cout << "|| " << left << setw(5) << (i + 1) // ID is array index + 1
+             << "| " << left << setw(14) << roomNames[i]
              // Right-align price for numeric clarity
-             << "| " << right << setw(10) << rooms[i].pricePerNight << " " << left << setw(3) << ""
-             << "| " << left << setw(57) << rooms[i].amenities << "||" << endl;
+             << "| " << right << setw(10) << pricesPerNight[i] << " " << left << setw(3) << ""
+             << "| " << left << setw(57) << amenitiesList[i] << "||" << endl;
     }
 
     printDoubleSeparator();
 }
 
+// ---------------- EXAMPLE MAIN FUNCTION ----------------
+int main() {
+    showRooms();
+    return 0;
+}
